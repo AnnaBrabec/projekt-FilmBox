@@ -103,4 +103,45 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'vecny-svit',
+		nazev: 'Věčný svit neposkvrněné mysli',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/164/160/164160500_547d34.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Surrealistický milostný příběh.',
+		popis:
+			'Joel (Jim Carrey) je ohromen, když zjistí, že si jeho přítelkyně Clementine (Kate Winsletová) nechala vymazat z paměti jejich bouřlivý vztah. Ze zoufalství kontaktuje vynálezce tohoto zákroku, doktora Howarda Mierzwiaka (Tom Wilkinson), aby mu naordinoval stejnou léčbu. Když se však jeho vzpomínky na Clementine začnou vytrácet, Joel si náhle uvědomí, jak moc ji stále miluje. Charlie Kaufman získal Oscara za (velmi) originální scénář. V tomto surrealistickém milostném příběhu, který je úchvatným a vizuálně podmanivým mistrovským dílem, hrají také Kirsten Dunstová, Elijah Wood a Mark Ruffalo. (Cinemax)',
+		premiera: '2004-08-12',
+	},
 ]
+
+const seznamFilmu = document.querySelector("#seznam-filmu")
+seznamFilmu.innerHTML = ""
+
+filmy.forEach(film => {
+	// Vytvoření HTML pro každý film
+	const filmHTML = `
+		<div class="col">
+			<div class="card">
+				<img
+					src="${film.plakat.url}"
+					width="${film.plakat.sirka}"
+					height="${film.plakat.vyska}"
+					class="card-img-top"
+					alt="plakát"
+				/>
+				<div class="card-body">
+					<h5 class="card-title">${film.nazev}</h5>
+					<p class="card-text">${film.ochutnavka}</p>
+					<a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+				</div>
+			</div>
+		</div>
+	`;
+
+	// Přidání HTML k seznamu filmů
+	seznamFilmu.innerHTML += filmHTML;
+});

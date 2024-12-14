@@ -104,3 +104,72 @@ const filmy = [
 		premiera: '2022-12-24',
 	},
 ]
+
+const filmId = location.hash.slice(1) //odstranění mřížky
+
+const result = filmy.find(film => filmId === film.id) //hledání id filmu
+
+if (result) {
+	// Aktualizace názvu filmu
+	document.querySelector(".card-title").textContent = result.nazev
+  
+	// Aktualizace popisu filmu
+	document.querySelector(".card-text").textContent = result.ochutnavka
+  
+	// Aktualizace obrázku plakátu
+	const plakat = document.querySelector('#detail-filmu img')
+	plakat.src = result.plakat.url
+	plakat.alt = result.nazev
+
+	// Aktualizace data premiéry
+	
+	const premieraDatum = result.premiera
+	const formattedDate = dayjs(premieraDatum).format("D.M.YYYY");
+	
+	document.querySelector("#premiera").innerHTML = `Premiéra <strong>${formattedDate}</strong>`;
+	document.innerHTML
+	const dnes = dayjs()
+	const rozdilVDnech = dnes.diff(premieraDatum, 'day');
+	if (rozdilVDnech > 0) {
+		document.querySelector("#premiera").innerHTML = `Premiéra <strong>${formattedDate}</strong>
+		<br>Premiéra byla před ${rozdilVDnech} dny.`
+	  } else if (rozdilVDnech < 0) {
+		document.querySelector("#premiera").innerHTML = `Premiéra <strong>${formattedDate}</strong>
+		<br>Premiéra byla před ${rozdilVDnech} dny.`
+	  } else {
+		document.querySelector("#premiera").innerHTML =`Premiéra <strong>${formattedDate}</strong>
+		<br>Premiéra je dnes!
+		`
+	  }
+  } else {
+	document.querySelector('#detail-filmu').innerHTML = '<p>Film nebyl nalezen.</p>'
+  }
+
+  const form = document.querySelector("#note-form")
+  const messageInput = document.querySelector('#message-input')
+  const termsCheckbox = document.querySelector('#terms-checkbox')
+  form.addEventListener('submit', function(event){
+	event.preventDefault()
+	if (messageInput.value.trim() === '') {
+		messageInput.classList.add('is-invalid');
+	  } else {
+		messageInput.classList.remove('is-invalid');
+	  } //odebírání třídy u poznámky
+	  if (!termsCheckbox.checked) {
+		termsCheckbox.classList.add('is-invalid');
+	  } else {
+		termsCheckbox.classList.remove('is-invalid') //odebírání třídy u všeobecných podmínek
+	  }
+	  if (messageInput.value.trim() !== '' && termsCheckbox.checked) {
+		const messageText = messageInput.value;
+
+		// Vytvoření nového odstavce <p> s textem poznámky
+		const newParagraph = document.createElement('p');
+		newParagraph.classList.add('card-text');
+		newParagraph.textContent = messageText;
+	
+		form.innerHTML = '';
+		form.innerHTML = '<p class="card-text">' + messageText + '</p>'
+	  }
+	
+  })
