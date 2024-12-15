@@ -10,7 +10,7 @@ const filmy = [
 		ochutnavka: 'České drama z období 1968.',
 		popis:
 			'A je tu zpět jedna z nejúspěšnějších českých filmových komedií od renomovaných tvůrců - režiséra J. Hřebejka a scenáristy P. Jarchovského s řadou skvělých herců. Vraťme se tedy s oblíbenými postavami k rodinným rituálům, láskám a trapasům odehrávajícím se na sklonku šedesátých let minulého století v jedné pražské čtvrti. Jemná poetika a humorná nadsázka jsou charakteristické pro vyprávění životních osudů tří generací mužů a žen ve zvláštním období našich dějin v roce 1968… V jedné dvoupatrové vile tu žijí dvě rodiny - Šebkovi a Krausovi. Otec Šebek (M. Donutil), prostoduchý, ale dobrácký důstojník z povolání, je zastáncem panujícího režimu a stejně vehementně obhajuje i vlastní neomylnost v roli hlavy rodiny. Elegantní otec Kraus (J. Kodet), bývalý odbojář s trpkou válečnou zkušeností, je naopak zarytým opozičníkem. Také on je přesvědčený o tom, že má za všech okolností pravdu - není proto divu, že se tihle dva nemají zrovna v lásce. Jejich děti - gymnazista Michal (M. Beran) a jeho spolužačka Jindřiška (K. Nováková) - spolu vycházejí docela dobře. I když Michal by byl rád, kdyby ho jeho sousedka brala trochu víc na vědomí. Ta má ale oči pro jiného. Nezbývá mu tedy nic jiného, než aby smutně přihlížel, jak mu jeho první milostné body krade spolužák Elien (O. Brousek). U Šebků a Krausů se zatím střídají rodinné návštěvy, ve vší obřadnosti se tu slaví Vánoce, svatba i nečekaný, bolestný pohřeb. Do zabydlených domácností vtrhnou i některé novodobé vymoženosti v podobě umělohmotných lžiček, nerozbitných sklenic i podivných her pro statečné pionýry. Mládež zatím pokukuje po lákadlech světa kapitalismu a snaží se žít svůj vlastní, na rodičovských autoritách a "velké" historii nezávislý život. V soukromí rodinných pelíšků se tak čas od času odehrají malá dramata názorů a vztahů, která se v paměti jejich účastníků otisknou už nejspíš navždy… (csfd.cz, Česká televize)',
-		premiera: '2019-04-08',
+		premiera: '1999-08-08',
 	},
 	{
 		id: 'promlceno',
@@ -130,12 +130,19 @@ if (result) {
 	document.innerHTML
 	const dnes = dayjs()
 	const rozdilVDnech = dnes.diff(premieraDatum, 'day');
+	function sklonujDen(rozdil) {
+		if (rozdil === 1) {
+		  return "dnem";
+		} else if (rozdil > 1) {
+		  return "dny";
+		}
+	  }
 	if (rozdilVDnech > 0) {
 		document.querySelector("#premiera").innerHTML = `Premiéra <strong>${formattedDate}</strong>
-		<br>Premiéra byla před ${rozdilVDnech} dny.`
+		<br>Premiéra byla před ${rozdilVDnech} ${sklonujDen(rozdilVDnech)}.`
 	  } else if (rozdilVDnech < 0) {
 		document.querySelector("#premiera").innerHTML = `Premiéra <strong>${formattedDate}</strong>
-		<br>Premiéra byla před ${rozdilVDnech} dny.`
+		<br>Premiéra byla před ${rozdilVDnech} ${sklonujDen(rozdilVDnech)}.`
 	  } else {
 		document.querySelector("#premiera").innerHTML =`Premiéra <strong>${formattedDate}</strong>
 		<br>Premiéra je dnes!
